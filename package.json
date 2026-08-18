@@ -1,0 +1,39 @@
+{
+  "name": "cloud-honeypot",
+  "version": "1.0.0",
+  "description": "Automated AWS deploy of the SANS ISC DShield honeypot",
+  "private": true,
+  "bin": {
+    "cloud-honeypot": "bin/cloud-honeypot.ts"
+  },
+  "scripts": {
+    "build": "tsc --noEmit",
+    "test": "jest",
+    "lint": "eslint .",
+    "cdk": "cdk",
+    "synth": "cdk synth --strict",
+    "deploy": "bash scripts/deploy.sh",
+    "diff": "cdk diff",
+    "destroy": "cdk destroy"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@types/jest": "30.0.0",
+    "@types/node": "22.20.1",
+    "aws-cdk": "2.1137.0",
+    "eslint": "9.39.2",
+    "eslint-plugin-awscdk": "4.4.0",
+    "jest": "30.4.2",
+    "ts-jest": "29.4.6",
+    "tsx": "4.23.12",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.67.0"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "2.265.0",
+    "cdk-nag": "2.38.2",
+    "constructs": "10.8.1"
+  }
+}
