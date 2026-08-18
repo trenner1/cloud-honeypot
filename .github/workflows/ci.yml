@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [cloud-honeypot, main]
+    branches: [main]
   pull_request:
-    branches: [cloud-honeypot, main]
+    branches: [main]
 
 permissions:
   contents: read
