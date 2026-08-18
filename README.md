@@ -139,6 +139,13 @@ npx cdk destroy DshieldHoneypot
 
 The Elastic IP and instance go away; public IPv4 charges stop. Delete the ISC API key in the DShield account if you will not redeploy.
 
+## Security
+
+- **Dependabot** (`.github/dependabot.yml`) opens weekly PRs for npm and GitHub Actions updates
+- **CI** (`.github/workflows/ci.yml`) runs build, tests, lint, and `npm audit`
+- **Secret scan** (`.github/workflows/gitleaks.yml`) scans every push and PR for leaked credentials
+- Never commit `DSHIELD_*` values, `.env`, or `cdk.context.json` (local account/region cache)
+
 ## Notes
 
 - This is a **low-interaction** honeypot (Cowrie + HTTP decoys), not a vulnerable machine

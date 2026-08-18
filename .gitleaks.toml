@@ -1,0 +1,13 @@
+# Allow documented placeholders and lockfile noise; fail on real credentials.
+title = "cloud-honeypot"
+
+[allowlist]
+description = "README examples and dependency lock metadata"
+paths = [
+  '''(?i)package-lock\.json''',
+]
+regexes = [
+  "your-api-key",
+  "you@example\\.com",
+  "DSHIELD_USERID='123456'",
+]

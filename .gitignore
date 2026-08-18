@@ -3,6 +3,7 @@
 *.d.ts
 node_modules
 .cdk.staging
+cdk.context.json
 cdk.out
 dist
 .env
