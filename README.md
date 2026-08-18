@@ -146,6 +146,24 @@ The Elastic IP and instance go away; public IPv4 charges stop. Delete the ISC AP
 - **Secret scan** (`.github/workflows/gitleaks.yml`) scans every push and PR for leaked credentials
 - Never commit `DSHIELD_*` values, `.env`, or `cdk.context.json` (local account/region cache)
 
+## Contributing
+
+`main` is protected:
+
+- All changes must go through a **pull request** (no direct pushes, including admins)
+- **CI** (`test`) and **Secret scan** (`gitleaks`) must pass before merge
+- Branch must be **up to date** with `main` before merging
+
+On a personal repo, only the owner has write access. Workflow:
+
+```bash
+git checkout -b my-change
+# edit, commit
+git push -u origin my-change
+gh pr create --base main
+# merge after checks pass
+```
+
 ## Notes
 
 - This is a **low-interaction** honeypot (Cowrie + HTTP decoys), not a vulnerable machine
