@@ -13,6 +13,7 @@
     "cdk": "cdk",
     "synth": "cdk synth --strict",
     "deploy": "bash scripts/deploy.sh",
+    "ssm": "bash scripts/ssm.sh",
     "diff": "cdk diff",
     "destroy": "cdk destroy"
   },
