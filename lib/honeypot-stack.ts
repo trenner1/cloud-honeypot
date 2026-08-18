@@ -136,7 +136,11 @@ export class HoneypotStack extends cdk.Stack {
     });
     new cdk.CfnOutput(this, 'SessionManagerCommand', {
       value: `aws ssm start-session --target ${this.sensor.instance.instanceId}`,
-      description: 'Admin channel (no inbound SSH required)',
+      description: 'Admin channel (no inbound SSH required); or npm run ssm',
+    });
+    new cdk.CfnOutput(this, 'StatusCommand', {
+      value: 'sudo /home/dshield/dshield/bin/status.sh',
+      description: 'Run on the instance as root after INSTALL_COMPLETE and reboot',
     });
     new cdk.CfnOutput(this, 'CredentialsSecretName', {
       value: this.credentials.secretName,

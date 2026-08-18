@@ -79,6 +79,7 @@ test('assigns an Elastic IP and emits admin outputs', () => {
   template.hasOutput('InstanceId', {});
   template.hasOutput('PublicIp', {});
   template.hasOutput('SessionManagerCommand', {});
+  template.hasOutput('StatusCommand', {});
 });
 
 test('resolves Ubuntu 24.04 AMI from SSM at deploy time', () => {
