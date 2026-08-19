@@ -71,16 +71,27 @@ test('stores ISC credentials in Secrets Manager from NoEcho parameters', () => {
   });
 });
 
-test('user-data re-execs under bash so Ubuntu cloud-init dash does not die on pipefail', () => {
-  const { template } = synthStack();
+function renderedUserData(template: Template): string {
   const instances = template.findResources('AWS::EC2::Instance');
   const instance = Object.values(instances)[0] as {
     Properties: { UserData: { 'Fn::Base64': { 'Fn::Join': [string, unknown[]] } } };
   };
   const pieces = instance.Properties.UserData['Fn::Base64']['Fn::Join'][1];
-  const rendered = pieces.map((piece) => (typeof piece === 'string' ? piece : '')).join('');
+  return pieces.map((piece) => (typeof piece === 'string' ? piece : '')).join('');
+}
+
+test('user-data re-execs under bash so Ubuntu cloud-init dash does not die on pipefail', () => {
+  const { template } = synthStack();
+  const rendered = renderedUserData(template);
   expect(rendered).toContain('exec /bin/bash "$0" "$@"');
   expect(rendered).toContain('set -Eeuo pipefail');
+});
+
+test('user-data contains no CRLF so Windows git checkouts do not corrupt the Linux script', () => {
+  const { template } = synthStack();
+  const rendered = renderedUserData(template);
+  expect(rendered).not.toContain('\r\n');
+  expect(rendered).not.toContain('\r');
 });
 
 test('assigns an Elastic IP and emits admin outputs', () => {
