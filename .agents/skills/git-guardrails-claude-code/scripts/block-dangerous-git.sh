@@ -1,7 +1,15 @@
 #!/bin/bash
 
 INPUT=$(cat)
-COMMAND=$(echo "$INPUT" | jq -r '.tool_input.command')
+
+# This hook may run in environments where `jq` isn't installed.
+# In that case, fail open (no blocking) rather than crashing the caller.
+if ! command -v jq >/dev/null 2>&1; then
+  echo "NOTICE: jq not found; skipping dangerous-git guardrails." >&2
+  exit 0
+fi
+
+COMMAND="$(echo "$INPUT" | jq -r '.tool_input.command // empty' 2>/dev/null || true)"
 
 DANGEROUS_PATTERNS=(
   "git push"
