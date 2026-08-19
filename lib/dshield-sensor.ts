@@ -75,6 +75,8 @@ export class DshieldSensor extends Construct {
     props.logGroup.grantWrite(instance.role);
     instance.role.addManagedPolicy(iam.ManagedPolicy.fromAwsManagedPolicyName('CloudWatchAgentServerPolicy'));
 
+    // Shebang is stripped: CDK UserData already starts with #!/bin/bash, but
+    // Ubuntu cloud-init still invokes the script with dash (see bootstrap.sh).
     const bootstrap = fs.readFileSync(path.join(__dirname, 'bootstrap.sh'), 'utf8').replace(/^#![^\n]*\n/, '');
 
     instance.userData.addCommands(
