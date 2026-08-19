@@ -3,6 +3,13 @@
 # Expected environment (injected by CDK user-data):
 #   DSHIELD_SECRET_ARN, EXPECTED_PUBLIC_IP, LOG_GROUP_NAME,
 #   VPC_CIDR, ADMIN_CIDR (optional), DSHIELD_GIT_URL, DSHIELD_GIT_REF
+#
+# Ubuntu cloud-init runs /var/lib/cloud/instance/scripts/part-001 with /bin/sh
+# (dash), which rejects `set -o pipefail` and process substitution. Re-exec
+# under bash before any bash-only syntax.
+if [ -z "${BASH_VERSION:-}" ]; then
+  exec /bin/bash "$0" "$@"
+fi
 set -Eeuo pipefail
 
 BOOTSTRAP_LOG=/var/log/honeypot-bootstrap.log
