@@ -77,7 +77,11 @@ export class DshieldSensor extends Construct {
 
     // Shebang is stripped: CDK UserData already starts with #!/bin/bash, but
     // Ubuntu cloud-init still invokes the script with dash (see bootstrap.sh).
-    const bootstrap = fs.readFileSync(path.join(__dirname, 'bootstrap.sh'), 'utf8').replace(/^#![^\n]*\n/, '');
+    // Strip \r so a Windows git checkout with core.autocrlf=true does not embed
+    // CRLF line endings into the EC2 user-data, which Linux bash cannot execute.
+    const bootstrap = fs.readFileSync(path.join(__dirname, 'bootstrap.sh'), 'utf8')
+      .replace(/\r\n/g, '\n')
+      .replace(/^#![^\n]*\n/, '');
 
     instance.userData.addCommands(
       `export DSHIELD_SECRET_ARN='${props.credentials.secretArn}'`,
