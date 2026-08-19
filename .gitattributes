@@ -1,0 +1,10 @@
+# Ensure consistent line endings across platforms.
+# Shell scripts embedded in EC2 user-data must be LF; CRLF breaks bash on Linux.
+* text=auto
+*.sh text eol=lf
+*.ts text eol=lf
+*.js text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
