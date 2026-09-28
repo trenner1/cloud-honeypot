@@ -22,15 +22,15 @@
   },
   "devDependencies": {
     "@types/jest": "30.0.0",
-    "@types/node": "26.2.0",
+    "@types/node": "26.6.2",
     "aws-cdk": "2.1137.0",
-    "eslint": "10.8.1",
-    "eslint-plugin-awscdk": "4.4.0",
-    "jest": "30.4.2",
-    "ts-jest": "29.4.12",
-    "tsx": "4.23.12",
+    "eslint": "10.11.0",
+    "eslint-plugin-awscdk": "4.4.3",
+    "jest": "30.5.2",
+    "ts-jest": "29.4.13",
+    "tsx": "4.23.15",
     "typescript": "5.9.3",
-    "typescript-eslint": "8.67.0"
+    "typescript-eslint": "8.70.1"
   },
   "dependencies": {
     "aws-cdk-lib": "2.265.0",
